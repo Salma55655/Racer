@@ -169,6 +169,8 @@ function handleSelectPodRacer(target) {
 	target.classList.add('selected')
 
 	// TODO - save the selected racer to the store
+	store.race_id = target.id;
+
 }
 
 function handleSelectTrack(target) {
@@ -184,12 +186,15 @@ function handleSelectTrack(target) {
 	target.classList.add('selected')
 
 	// TODO - save the selected track id to the store
-	
+	store.track_id = target.id;
+  	store.player_id = +target.id;
+
 }
 
 function handleAccelerate() {
 	console.log("accelerate button clicked")
 	// TODO - Invoke the API call to accelerate
+  	accelerate(store.race_id - 1);
 }
 
 // HTML VIEWS ------------------------------------------------
