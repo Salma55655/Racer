@@ -1,0 +1,28 @@
+/* RESULTS PAGE SPECIFIC STYLES */
+
+/* -------------------  MOBILE  --------------------- */
+
+
+/* -------------------  TABLET  --------------------- */
+@media (min-width: 768px) {
+
+}
+
+/* -------------------  DESKTOP  -------------------- */
+
+@media (min-width: 1224px) {
+    a{
+        margin-bottom: 20px;
+    }
+}
+a{
+    padding-bottom: 20px;
+}
+main{
+    display: flex;
+    justify-content: center;
+}
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: 1824px) {
+}
