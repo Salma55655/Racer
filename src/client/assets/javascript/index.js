@@ -333,7 +333,6 @@ function renderAt(element, html) {
 
 
 // API CALLS ------------------------------------------------
-
 const SERVER = 'http://localhost:3001'
 
 function defaultFetchOpts() {
@@ -346,21 +345,31 @@ function defaultFetchOpts() {
 	}
 }
 
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
+// TODO - Make a fetch call (with error handling!) to each of the following API endpoints
 
 function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
+	return fetch(`${SERVER}/api/tracks`)
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => ({ error: true, message: err.message }));
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
+	return fetch(`${SERVER}/api/cars`, { ...defaultFetchOpts() })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => ({ error: true, message: err.message }));
 }
 
 function createRace(player_id, track_id) {
 	player_id = parseInt(player_id)
 	track_id = parseInt(track_id)
 	const body = { player_id, track_id }
-	
+
 	return fetch(`${SERVER}/api/races`, {
 		method: 'POST',
 		...defaultFetchOpts(),
@@ -373,6 +382,9 @@ function createRace(player_id, track_id) {
 
 function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
+	return fetch(`${SERVER}/api/races/${id}`)
+    .then((resp) => resp.json())
+    .catch((err) => ({ error: true, message: err.message }));
 }
 
 function startRace(id) {
@@ -380,7 +392,6 @@ function startRace(id) {
 		method: 'POST',
 		...defaultFetchOpts(),
 	})
-	.then(res => res.json())
 	.catch(err => console.log("Problem with getRace request::", err))
 }
 
@@ -388,4 +399,7 @@ function accelerate(id) {
 	// POST request to `${SERVER}/api/races/${id}/accelerate`
 	// options parameter provided as defaultFetchOpts
 	// no body or datatype needed for this request
+	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
+		method: "POST",
+	}).catch((err) => console.log("Problem with createRace request::", err));
 }
